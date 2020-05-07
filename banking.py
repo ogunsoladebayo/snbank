@@ -1,6 +1,10 @@
 def searchfunction(username, password):
-    if username == 'admin' and password == 'admin':
-    # search in staff.txt and set complete to true if found
+    user = 'Username: ' + username + '\n' + 'Password: ' + password
+
+    # search in staff.txt and set complete to true if found otherwise return false
+    with open('staff.txt', 'r') as a:
+        staff = a.read()
+    if user in staff:
         complete = True
     else:
         complete = False
