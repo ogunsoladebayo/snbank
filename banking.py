@@ -34,7 +34,7 @@ def create_account():
         account_number += str(random.randint(0, 9))
     # save all details in customer.txt
     with open('customer.txt', 'a') as a:
-        a.write('Account Number: ' + account_number + ', Account Name: ' + account_name + ', Opening Balance: ' + opening_balance + ', Account Type: ' +  account_type + ', Account Email: ' + account_email + '\n')
+        a.write('Account Number: ' + account_number + ' ' + ', Account Name: ' + account_name + ', Opening Balance: ' + opening_balance + ', Account Type: ' +  account_type + ', Account Email: ' + account_email + '\n')
     return account_number
 
 
@@ -81,7 +81,7 @@ while apprunning:
                             print ('A new account has been created. The customer account number is ' + account_number)
 
                         elif staff_option == '2':
-                            account_number = input('Enter customer account number: ')
+                            account_number = input('Enter customer account number: ') + ' '
                             customer_details = check_details(account_number)
                             print ('Customer details: ' + customer_details)
                         
