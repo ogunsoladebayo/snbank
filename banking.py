@@ -1,19 +1,26 @@
+from datetime import date, datetime
+import random
+import os
 def searchfunction(username, password):
-    user = 'Username: ' + username + '\n' + 'Password: ' + password
+    a = open('staff.txt', 'r')
+    keywords = ['Username: ' + username, 'Password: ' + password]
 
-    # search in staff.txt and set complete to true if found otherwise return false
-    with open('staff.txt', 'r') as a:
-        staff = a.read()
-    if user in staff:
-        complete = True
-    else:
-        complete = False
+    for line in a:
+        if all(keyword in line for keyword in keywords):
+            print('Login Successful... \n Welcome, ' + username)
+            complete = True
+            break
+        else:
+            complete = False
     return complete
 
 
-def createsession():
+def createsession(username):
+    today = date.today()
+    now = datetime.now()
     # create user session in a file
-    print ('session created')
+    with open('session.txt', 'w') as a:
+        a.write('session started... \n' + username + '\n' + today.strftime('%B %d, %Y') + '\n' + now.strftime('%H:%M:%S'))
 
 
 def create_account():
@@ -22,22 +29,31 @@ def create_account():
     account_type = input('Enter account type: ')
     account_email = input('Enter account email: ')
     # create account number
+    account_number = ''
+    for index in range(10):
+        account_number += str(random.randint(0, 9))
     # save all details in customer.txt
-    account_number = account_name + opening_balance + account_type + account_email
+    with open('customer.txt', 'a') as a:
+        a.write('Account Number: ' + account_number + ', Account Name: ' + account_name + ', Opening Balance: ' + opening_balance + ', Account Type: ' +  account_type + ', Account Email: ' + account_email + '\n')
     return account_number
 
 
 def check_details(account_number):
-    if account_number == 'found':
-        details = account_number
+    # read customer file
+    a = open('customer.txt', 'r')
     # do some searchings
-    else:
-        details = 'No details found'
-    return details #probably in an array if found
+
+    for line in a:
+        if ('Account Number: ' + account_number in line):
+            details = line
+        else:
+            details = 'No details found'
+    return details
 
 
 def delete_session():
-    print('session deleted')
+    os.unlink('session.txt')
+    print('You have logged out')
 
 
 apprunning = True
@@ -55,7 +71,7 @@ while apprunning:
             if searchfunction(username, password) == True:
                 staffverify = True
                 # continue to next step
-                createsession()
+                createsession(username)
                 staff_in_session = True
                 while staff_in_session:
                     staff_option = input('Press: \n 1 to Create new bank account \n 2 to Check Account Details \n 3 to Logout \n Input: ')

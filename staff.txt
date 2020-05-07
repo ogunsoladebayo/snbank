@@ -1,9 +1,2 @@
-Username: Staff 1
-Password: 12345
-Email: staff1@bank.com
-Full Name:  Bank Staff1
-
-Username: Staff 2
-Password: 01234
-Email: staff2@bank.com
-Full Name:  Bank Staff2
+Username: Staff 1 Password: 12345 Email: staff1@bank.com Full Name:  Bank Staff1
+Username: Staff 2 Password: 01234 Email: staff2@bank.com Full Name:  Bank Staff2
